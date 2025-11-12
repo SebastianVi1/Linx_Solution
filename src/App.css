@@ -23,11 +23,21 @@
   color: #0f172a;
 }
 
+.brand-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.18));
+}
+
 .brand-mark {
   width: 14px;
   height: 14px;
   border-radius: 3px;
   background: linear-gradient(135deg, #2563eb, #38bdf8);
+  box-shadow: 0 0 0 rgba(56, 189, 248, 0.6);
+  animation: pulse-glow 6s ease-in-out infinite;
 }
 
 .brand-text {
@@ -144,22 +154,43 @@
 }
 
 .visual-placeholder {
+  position: relative;
   width: 100%;
   min-height: 280px;
   border-radius: 24px;
-  border: 1px dashed #94a3b8;
-  background: linear-gradient(135deg, rgba(226, 232, 240, 0.6), rgba(226, 232, 240, 0.1));
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-  font-size: 0.95rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.55), rgba(37, 99, 235, 0.2));
+  box-shadow: 0 28px 50px rgba(15, 23, 42, 0.18);
 }
 
 .visual-placeholder.large {
   min-height: 320px;
+}
+
+.visual-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0));
+  transform: translateX(-100%);
+  animation: sweep 8s ease-in-out infinite;
+}
+
+.visual-placeholder,
+.visual-placeholder.large {
+  animation: float 14s ease-in-out infinite;
+}
+
+.visual-placeholder > * {
+  position: relative;
+  z-index: 1;
+}
+
+.visual-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .placeholder-caption {
@@ -245,20 +276,24 @@
 }
 
 .image-frame {
-  padding: 32px;
-  background-color: #f8fafc;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, rgba(226, 232, 240, 0.7), rgba(226, 232, 240, 0.2));
 }
 
-.image-placeholder {
-  border-radius: 18px;
-  border: 1px dashed #cbd5f5;
-  min-height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  color: #94a3b8;
-  text-align: center;
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.service-card:hover .service-image {
+  transform: scale(1.05);
 }
 
 .service-body {
@@ -293,6 +328,12 @@
   background-color: rgba(37, 99, 235, 0.08);
   color: #1d4ed8;
   font-size: 0.9rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.industry-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(37, 99, 235, 0.18);
 }
 
 .two-column {
@@ -312,6 +353,7 @@
   border-radius: 18px;
   background-color: #f8fafc;
   border: 1px solid rgba(15, 23, 42, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .differentiator h3 {
@@ -324,6 +366,179 @@
   margin: 0;
   color: #475569;
   line-height: 1.5;
+}
+
+.differentiator:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+}
+
+.team {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.team-media {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.18);
+}
+
+.team-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 0.6s ease;
+}
+
+.team-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.55) 100%);
+}
+
+.team-media:hover .team-image {
+  transform: scale(1.06);
+}
+
+.team-media-caption {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  background: rgba(15, 23, 42, 0.75);
+  color: #f8fafc;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.team-content {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+.team-highlights {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  color: #334155;
+}
+
+.team-highlights li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.team-highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.metrics.reveal-on-scroll {
+  transform: translateY(24px);
+}
+
+.metrics.reveal-on-scroll.is-visible {
+  transform: translateY(0);
+}
+
+.cta-section.reveal-on-scroll {
+  transform: translateY(28px);
+}
+
+.cta-section.reveal-on-scroll.is-visible {
+  transform: translateY(0);
+}
+
+@keyframes pulse-glow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    box-shadow: 0 0 0 rgba(56, 189, 248, 0.4);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.05);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    box-shadow: 0 0 0 rgba(56, 189, 248, 0.3);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-on-scroll.is-visible,
+  .cta-section.reveal-on-scroll,
+  .metrics.reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .brand-mark,
+  .visual-placeholder,
+  .visual-placeholder.large,
+  .visual-placeholder::after {
+    animation: none;
+  }
 }
 
 .two-column-visual {
@@ -468,7 +683,8 @@
   .hero,
   .two-column,
   .services-grid,
-  .contact {
+  .contact,
+  .team {
     grid-template-columns: 1fr;
   }
 
@@ -483,7 +699,8 @@
 
   .visual-placeholder,
   .visual-placeholder.large,
-  .image-placeholder {
+  .image-frame,
+  .team-media {
     min-height: 220px;
   }
 }
